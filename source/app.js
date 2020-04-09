@@ -32,7 +32,7 @@ app.use(express.static(publicpath));
 
 
 io.on('connection', (socket) => {
-    console.log("New connection")
+    // console.log("New connection")
     socket.on('join', (credientials, callback) => {
         const {
             error,
@@ -46,7 +46,7 @@ io.on('connection', (socket) => {
             return callback(error)
 
         }
-        console.log(user)
+        // console.log(user)
         socket.join(user.room)
         socket.emit('message', generatemsg('Admin', 'Welcome'));
 
@@ -83,7 +83,7 @@ io.on('connection', (socket) => {
 
     socket.on('location', (coords, callback) => {
         const user = getUser(socket.id);
-        console.log(user.room)
+        // console.log(user.room)
 
         let string = 'https://google.com/maps?q=' + coords.latitude + ',' + coords.longitude
         io.to(user.room).emit('locationmsg', generateLocationmsg(user.username, string))
